@@ -1,0 +1,49 @@
+pip install hikyuu -U
+
+开始请先下载数据
+pip 安装 Hikyuu 后，可在命令行终端中执行 hikyuutdx 命令，启动数据下载工具，并按界面提示下载数据
+
+如不希望使用 GUI 图形界面下载，可在命令行终端中执行 importdata 命令
+
+
+
+%matplotlib inline
+%time from hikyuu.interactive import *
+#use_draw_engine('echarts') #use_draw_engine('matplotlib')  #默认为'matplotlib'绘图
+
+
+
+
+
+安装 backtrader
+pip install backtrader[plotting] -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+
+折线（Line）
+交易数据（Data Feeds）、技术指标（Indicators）和策略（Strategies）都是折线（Line）。 折线（Line）是由一系列的点组成的。
+通常交易数据（Data Feeds）包含以下几个组成部分： 开盘价（Open）、最高价（High）、最低价（Low）、收盘价（Close）、成交量（Volume）、持仓量（OpenInterest）等。 比如：所有的开盘价（Open）按时间组成一条折线（Line），那么一组交易数据（Data Feeds）就应该包含了6条折线（Line）。
+再加上时间（DateTime）一共有7条折线（Line）。时间，一般用作一组交易数据的主键。
+
+
+索引从0开始
+当访问一条折线（Line）的数据时，会默认从下标为0的位置开始，最后一个数据通过下标-1来获取。这样的设计和Python的迭代器是一致的，所以折线（Line）是可以迭代遍历的。
+例如：创建一个简单移动平均值的策略（均值策略）： self.sma = SimpleMovingAverage(.....) 访问此移动平均线的当前值的最简单方法： av = self.sma[0]所以在回测过程中，无需知道已经处理了多少条/分钟/天/月，“0”一直指向当前值。
+按照Python遍历数组的方式，用下标-1来访问最后一个值： previous_value = self.sma[-1]。同理：-2、-3下标也是可以照常使用。
+
+
+头寸
+头寸（position）是一个金融术语，指的是个人或实体持有或拥有的特定商品、证券、货币等的数量
+但是在股票市场，似乎用来代表仓位更合适，position你可以理解成“开仓位置”或者“持仓位置”
+
+
+挂单（Pending order）- 用户下达给经纪商的、在市场报价达到某个水平才能执行的订单。 待执行订单。
+有四种挂单形式：
+Buy Limit - 在市场实时报价中的买价达到或低于挂单价位时建立长仓（买进）。该挂单价位应低于下单时的市场报价；
+Buy Stop - 在市场实时报价中的买价达到或高于挂单价位时建立长仓（买进）。该挂单价位应高于下单时的市场报价；
+Sell Limit - 在市场实时报价中的卖价达到或高于挂单价位时建立短仓（卖出）。该挂单价位应高于下单时的市场报价；
+Sell Stop - 在市场实时报价中的卖价达到或低于挂单价位时建立短仓（卖出）。该挂单价位应低于下单时的市场报价。
+
+
+
+
+
